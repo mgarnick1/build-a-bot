@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="content">
+    <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
     <div class="top-row">
       <div class="top part">
         <div class="robot-name">
@@ -35,11 +36,28 @@
         <button @click="selectNextBases()" class="next-selector">&#9658;</button>
       </div>
     </div>
+    <div>
+      <h1>Cart</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Robot</th>
+            <th class="cost">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(robot, index) in cart" :key="index">
+            <td>{{robot.head.title}}</td>
+            <td class="cost">{{robot.cost}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script>
-import availableParts from '../data/parts';
+import availableParts from "../data/parts";
 
 function getPreviousValidIndex(index, length) {
   const deprecatedIndex = index - 1;
@@ -51,7 +69,7 @@ function getNextValidIndex(index, length) {
 }
 
 export default {
-  name: 'RobotBuilder',
+  name: "RobotBuilder",
   data() {
     return {
       availableParts,
@@ -60,6 +78,7 @@ export default {
       selectedTorsoIndex: 0,
       selectedRightArmIndex: 0,
       selectedBasesIndex: 0,
+      cart: []
     };
   },
   computed: {
@@ -69,72 +88,82 @@ export default {
         leftArm: availableParts.arms[this.selectedLeftArmIndex],
         torso: availableParts.torsos[this.selectedTorsoIndex],
         rightArm: availableParts.arms[this.selectedRightArmIndex],
-        base: availableParts.bases[this.selectedBasesIndex],
+        base: availableParts.bases[this.selectedBasesIndex]
       };
-    },
+    }
   },
   methods: {
     selectNextHead() {
       this.selectedHeadIndex = getNextValidIndex(
         this.selectedHeadIndex,
-        availableParts.heads.length,
+        availableParts.heads.length
       );
     },
     selectPreviousHead() {
       this.selectedHeadIndex = getPreviousValidIndex(
         this.selectedHeadIndex,
-        availableParts.heads.length,
+        availableParts.heads.length
       );
     },
     selectPreviousLeftArm() {
       this.selectedLeftArmIndex = getPreviousValidIndex(
         this.selectedLeftArmIndex,
-        availableParts.arms.length,
+        availableParts.arms.length
       );
     },
     selectNextLeftArm() {
       this.selectedLeftArmIndex = getNextValidIndex(
         this.selectedLeftArmIndex,
-        availableParts.arms.length,
+        availableParts.arms.length
       );
     },
     selectNextTorsos() {
       this.selectedTorsoIndex = getNextValidIndex(
         this.selectedTorsoIndex,
-        availableParts.torsos.length,
+        availableParts.torsos.length
       );
     },
     selectPreviousTorsos() {
       this.selectedTorsoIndex = getPreviousValidIndex(
         this.selectedTorsoIndex,
-        availableParts.torsos.length,
+        availableParts.torsos.length
       );
     },
     selectPreviousRightArm() {
       this.selectedRightArmIndex = getPreviousValidIndex(
         this.selectedRightArmIndex,
-        availableParts.arms.length,
+        availableParts.arms.length
       );
     },
     selectNextRightArm() {
       this.selectedRightArmIndex = getNextValidIndex(
         this.selectedRightArmIndex,
-        availableParts.arms.length,
+        availableParts.arms.length
       );
     },
     selectPreviousBases() {
       this.selectedBasesIndex = getPreviousValidIndex(
         this.selectedBasesIndex,
-        availableParts.bases.length,
+        availableParts.bases.length
       );
     },
     selectNextBases() {
       this.selectedBasesIndex = getNextValidIndex(
         this.selectedBasesIndex,
-        availableParts.bases.length,
+        availableParts.bases.length
       );
     },
-  },
+    addToCart() {
+      const robot = this.selectedRobot;
+      const cost =
+        robot.head.cost +
+        robot.leftArm.cost +
+        robot.torso.cost +
+        robot.rightArm.cost +
+        robot.base.cost;
+      this.cart.push(Object.assign({}, robot, { cost }));
+    }
+  }
 };
 </script>
 
@@ -236,5 +265,25 @@ export default {
 }
 .sale {
   color: red;
+}
+
+.add-to-cart {
+  position: absolute;
+  right: 30px;
+  width: 220px;
+  padding: 3px;
+  font-size: 16px;
+}
+.content {
+  position: relative;
+}
+td,
+th {
+  text-align: left;
+  padding: 5px;
+  padding-right: 20px;
+}
+.cost {
+  text-align: right;
 }
 </style>
