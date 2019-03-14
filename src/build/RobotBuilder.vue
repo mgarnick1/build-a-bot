@@ -3,7 +3,8 @@
     <div class="top-row">
       <div class="top part">
         <div class="robot-name">
-            {{selectedRobot.head.title}}
+          {{selectedRobot.head.title}}
+          <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
         </div>
         <img :src="selectedRobot.head.src" title="head">
         <button @click="selectPreviousHead()" class="prev-selector">&#9668;</button>
@@ -38,7 +39,7 @@
 </template>
 
 <script>
-import availableParts from "../data/parts";
+import availableParts from '../data/parts';
 
 function getPreviousValidIndex(index, length) {
   const deprecatedIndex = index - 1;
@@ -50,7 +51,7 @@ function getNextValidIndex(index, length) {
 }
 
 export default {
-  name: "RobotBuilder",
+  name: 'RobotBuilder',
   data() {
     return {
       availableParts,
@@ -58,7 +59,7 @@ export default {
       selectedLeftArmIndex: 0,
       selectedTorsoIndex: 0,
       selectedRightArmIndex: 0,
-      selectedBasesIndex: 0
+      selectedBasesIndex: 0,
     };
   },
   computed: {
@@ -68,72 +69,72 @@ export default {
         leftArm: availableParts.arms[this.selectedLeftArmIndex],
         torso: availableParts.torsos[this.selectedTorsoIndex],
         rightArm: availableParts.arms[this.selectedRightArmIndex],
-        base: availableParts.bases[this.selectedBasesIndex]
+        base: availableParts.bases[this.selectedBasesIndex],
       };
-    }
+    },
   },
   methods: {
     selectNextHead() {
       this.selectedHeadIndex = getNextValidIndex(
         this.selectedHeadIndex,
-        availableParts.heads.length
+        availableParts.heads.length,
       );
     },
     selectPreviousHead() {
       this.selectedHeadIndex = getPreviousValidIndex(
         this.selectedHeadIndex,
-        availableParts.heads.length
+        availableParts.heads.length,
       );
     },
     selectPreviousLeftArm() {
       this.selectedLeftArmIndex = getPreviousValidIndex(
         this.selectedLeftArmIndex,
-        availableParts.arms.length
+        availableParts.arms.length,
       );
     },
     selectNextLeftArm() {
       this.selectedLeftArmIndex = getNextValidIndex(
         this.selectedLeftArmIndex,
-        availableParts.arms.length
+        availableParts.arms.length,
       );
     },
     selectNextTorsos() {
       this.selectedTorsoIndex = getNextValidIndex(
         this.selectedTorsoIndex,
-        availableParts.torsos.length
+        availableParts.torsos.length,
       );
     },
     selectPreviousTorsos() {
       this.selectedTorsoIndex = getPreviousValidIndex(
         this.selectedTorsoIndex,
-        availableParts.torsos.length
+        availableParts.torsos.length,
       );
     },
     selectPreviousRightArm() {
       this.selectedRightArmIndex = getPreviousValidIndex(
         this.selectedRightArmIndex,
-        availableParts.arms.length
+        availableParts.arms.length,
       );
     },
     selectNextRightArm() {
       this.selectedRightArmIndex = getNextValidIndex(
         this.selectedRightArmIndex,
-        availableParts.arms.length
+        availableParts.arms.length,
       );
     },
     selectPreviousBases() {
       this.selectedBasesIndex = getPreviousValidIndex(
         this.selectedBasesIndex,
-        availableParts.bases.length
+        availableParts.bases.length,
       );
     },
     selectNextBases() {
       this.selectedBasesIndex = getNextValidIndex(
         this.selectedBasesIndex,
-        availableParts.bases.length
+        availableParts.bases.length,
       );
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -232,5 +233,8 @@ export default {
   top: -25px;
   text-align: center;
   width: 100%;
+}
+.sale {
+  color: red;
 }
 </style>
