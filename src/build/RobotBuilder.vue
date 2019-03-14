@@ -2,31 +2,31 @@
   <div>
     <div class="top-row">
       <div class="top part">
-        <img :src="availableParts.heads[selectedHeadIndex].src" title="head">
+        <img :src="selectedRobot.head.src" title="head">
         <button @click="selectPreviousHead()" class="prev-selector">&#9668;</button>
         <button @click="selectNextHead()" class="next-selector">&#9658;</button>
       </div>
     </div>
     <div class="middle-row">
       <div class="left part">
-        <img :src="availableParts.arms[selectedLeftArmIndex].src" title="left arm">
+        <img :src="selectedRobot.leftArm.src" title="left arm">
         <button @click="selectPreviousLeftArm()" class="prev-selector">&#9650;</button>
         <button @click="selectNextLeftArm()" class="next-selector">&#9660;</button>
       </div>
       <div class="center part">
-        <img :src="availableParts.torsos[selectedToroIndex].src" title="left arm">
+        <img :src="selectedRobot.torso.src" title="left arm">
         <button @click="selectPreviousTorsos()" class="prev-selector">&#9668;</button>
         <button @click="selectNextTorsos()" class="next-selector">&#9658;</button>
       </div>
       <div class="right part">
-        <img :src="availableParts.arms[selectedRightArmIndex].src" title="left arm">
+        <img :src="selectedRobot.rightArm.src" title="left arm">
         <button @click="selectPreviousRightArm()" class="prev-selector">&#9650;</button>
         <button @click="selectNextRightArm()" class="next-selector">&#9660;</button>
       </div>
     </div>
     <div class="bottom-row">
       <div class="bottom part">
-        <img :src="availableParts.bases[selectedBasesIndex].src" title="left arm">
+        <img :src="selectedRobot.base.src" title="left arm">
         <button @click="selectPreviousBases()" class="prev-selector">&#9668;</button>
         <button @click="selectNextBases()" class="next-selector">&#9658;</button>
       </div>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import availableParts from '../data/parts';
+import availableParts from "../data/parts";
 
 function getPreviousValidIndex(index, length) {
   const deprecatedIndex = index - 1;
@@ -47,79 +47,90 @@ function getNextValidIndex(index, length) {
 }
 
 export default {
-  name: 'RobotBuilder',
+  name: "RobotBuilder",
   data() {
     return {
       availableParts,
       selectedHeadIndex: 0,
       selectedLeftArmIndex: 0,
-      selectedToroIndex: 0,
+      selectedTorsoIndex: 0,
       selectedRightArmIndex: 0,
-      selectedBasesIndex: 0,
+      selectedBasesIndex: 0
     };
+  },
+  computed: {
+    selectedRobot() {
+      return {
+        head: availableParts.heads[this.selectedHeadIndex],
+        leftArm: availableParts.arms[this.selectedLeftArmIndex],
+        torso: availableParts.torsos[this.selectedTorsoIndex],
+        rightArm: availableParts.arms[this.selectedRightArmIndex],
+        base: availableParts.bases[this.selectedBasesIndex]
+      };
+    }
   },
   methods: {
     selectNextHead() {
       this.selectedHeadIndex = getNextValidIndex(
         this.selectedHeadIndex,
-        availableParts.heads.length,
+        availableParts.heads.length
       );
     },
     selectPreviousHead() {
       this.selectedHeadIndex = getPreviousValidIndex(
         this.selectedHeadIndex,
-        availableParts.heads.length,
+        availableParts.heads.length
       );
     },
     selectPreviousLeftArm() {
       this.selectedLeftArmIndex = getPreviousValidIndex(
         this.selectedLeftArmIndex,
-        availableParts.arms.length,
+        availableParts.arms.length
       );
     },
     selectNextLeftArm() {
       this.selectedLeftArmIndex = getNextValidIndex(
         this.selectedLeftArmIndex,
-        availableParts.arms.length,
+        availableParts.arms.length
       );
     },
     selectNextTorsos() {
-      this.selectedToroIndex = getNextValidIndex(
-        this.selectedToroIndex,
-        availableParts.torsos.length,
+      this.selectedTorsoIndex = getNextValidIndex(
+        this.selectedTorsoIndex,
+        availableParts.torsos.length
       );
     },
     selectPreviousTorsos() {
-      this.selectedToroIndex = getPreviousValidIndex(
-        this.selectedToroIndex,
-        availableParts.torsos.length,
+      this.selectedTorsoIndex = getPreviousValidIndex(
+        this.selectedTorsoIndex,
+        availableParts.torsos.length
       );
     },
     selectPreviousRightArm() {
       this.selectedRightArmIndex = getPreviousValidIndex(
         this.selectedRightArmIndex,
-        availableParts.arms.length,
+        availableParts.arms.length
       );
     },
     selectNextRightArm() {
       this.selectedRightArmIndex = getNextValidIndex(
         this.selectedRightArmIndex,
-        availableParts.arms.length,
+        availableParts.arms.length
       );
     },
     selectPreviousBases() {
       this.selectedBasesIndex = getPreviousValidIndex(
         this.selectedBasesIndex,
-        availableParts.bases.length,
+        availableParts.bases.length
       );
     },
     selectNextBases() {
       this.selectedBasesIndex = getNextValidIndex(
         this.selectedBasesIndex,
-        availableParts.bases.length,
+        availableParts.bases.length
       );
-    },
-  },
+    }
+  }
 };
 </script>
 
