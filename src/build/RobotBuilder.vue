@@ -75,13 +75,13 @@
 </template>
 
 <script>
-import availableParts from "../data/parts";
-import createdHookMixin from "./created-hook-mixin";
-import PartSelector from "./PartSelector.vue";
-import CollapsibleSection from "../shared/CollapsibleSection.vue";
+import availableParts from '../data/parts';
+import createdHookMixin from './created-hook-mixin';
+import PartSelector from './PartSelector.vue';
+import CollapsibleSection from '../shared/CollapsibleSection.vue';
 
 export default {
-  name: "RobotBuilder",
+  name: 'RobotBuilder',
   components: { PartSelector, CollapsibleSection },
   data() {
     return {
@@ -92,8 +92,8 @@ export default {
         leftArm: {},
         torso: {},
         rightArm: {},
-        base: {}
-      }
+        base: {},
+      },
     };
   },
   mixins: [createdHookMixin],
@@ -101,26 +101,25 @@ export default {
     headBorderStyle() {
       return {
         border: this.selectedRobot.head.onSale
-          ? "3px solid red"
-          : "3px solid #aaa"
+          ? '3px solid red'
+          : '3px solid #aaa',
       };
     },
     saleBorderClass() {
-      return this.selectedRobot.head.onSale ? "sale-border" : "";
-    }
+      return this.selectedRobot.head.onSale ? 'sale-border' : '';
+    },
   },
   methods: {
     addToCart() {
       const robot = this.selectedRobot;
-      const cost =
-        robot.head.cost +
-        robot.leftArm.cost +
-        robot.torso.cost +
-        robot.rightArm.cost +
-        robot.base.cost;
+      const cost = robot.head.cost
+        + robot.leftArm.cost
+        + robot.torso.cost
+        + robot.rightArm.cost
+        + robot.base.cost;
       this.cart.push(Object.assign({}, robot, { cost }));
-    }
-  }
+    },
+  },
 };
 </script>
 

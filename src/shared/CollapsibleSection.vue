@@ -11,10 +11,10 @@
 
 <script>
 export default {
-  name: "CollapsibleSection",
+  name: 'CollapsibleSection',
   data() {
     return { open: true };
-  }
+  },
 };
 </script>
 
