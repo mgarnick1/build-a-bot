@@ -37,7 +37,7 @@ export default {
       return this.parts[this.selectedPartIndex];
     }
   },
-  updated() {
+  created() {
     this.emitSelectedPart();
   },
   methods: {
