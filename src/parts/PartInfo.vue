@@ -6,16 +6,15 @@
 </template>
 
 <script>
-import parts from "../data/parts";
+import parts from '../data/parts';
 
 export default {
-  name: "PartInfo",
+  name: 'PartInfo',
   computed: {
     part() {
       const { partType, id } = this.$route.params;
       return parts[partType].find(part => part.id === +id);
-    }
-  }
+    },
+  },
 };
 </script>
-
