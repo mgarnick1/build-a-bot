@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "Standard"
+  name: 'Standard',
 };
 </script>
 
@@ -14,4 +14,3 @@ export default {
   transform: rotate(90deg);
 }
 </style>
-

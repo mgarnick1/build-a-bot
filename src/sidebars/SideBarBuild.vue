@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "Build"
+  name: 'Build',
 };
 </script>
 
@@ -15,4 +15,3 @@ export default {
   color: green;
 }
 </style>
-
