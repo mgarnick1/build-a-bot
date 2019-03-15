@@ -1,10 +1,10 @@
 <template>
   <div class="part" :class="position">
-    <router-link :to="{
-      name: 'Parts',
-      params: {
-        id: this.selectedPart.id,
-        partType: this.selectedPart.type
+    <router-link :to="{ 
+      name: 'Parts', 
+      params: { 
+        id: this.selectedPart.id, 
+        partType: this.selectedPart.type 
       }}">
       <img :src="selectedPart.src" title="arm">
     </router-link>
@@ -32,9 +32,9 @@ export default {
       type: String,
       required: true,
       validator(value) {
-        return ['left', 'right', 'center', 'bottom', 'top'].includes(value);
-      },
-    },
+        return ["left", "right", "center", "bottom", "top"].includes(value);
+      }
+    }
   },
   data() {
     return { selectedPartIndex: 0 };
@@ -42,7 +42,7 @@ export default {
   computed: {
     selectedPart() {
       return this.parts[this.selectedPartIndex];
-    },
+    }
   },
   created() {
     this.emitSelectedPart();
@@ -52,21 +52,21 @@ export default {
   },
   methods: {
     emitSelectedPart() {
-      this.$emit('partSelected', this.selectedPart);
+      this.$emit("partSelected", this.selectedPart);
     },
     selectNextPart() {
       this.selectedPartIndex = getNextValidIndex(
         this.selectedPartIndex,
-        this.parts.length,
+        this.parts.length
       );
     },
     selectPreviousPart() {
       this.selectedPartIndex = getPreviousValidIndex(
         this.selectedPartIndex,
-        this.parts.length,
+        this.parts.length
       );
-    },
-  },
+    }
+  }
 };
 </script>
 
