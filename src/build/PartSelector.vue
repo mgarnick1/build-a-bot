@@ -24,7 +24,7 @@ export default {
     position: {
       type: String,
       required: true,
-      validator: function(value) {
+      validator(value) {
         return ["left", "right", "center", "bottom", "top"].includes(value);
       }
     }
@@ -37,7 +37,13 @@ export default {
       return this.parts[this.selectedPartIndex];
     }
   },
+  updated() {
+    this.emitSelectedPart();
+  },
   methods: {
+    emitSelectedPart() {
+      this.$emit("partSelected", this.selectedPart);
+    },
     selectNextPart() {
       this.selectedPartIndex = getNextValidIndex(
         this.selectedPartIndex,
@@ -49,6 +55,7 @@ export default {
         this.selectedPartIndex,
         this.parts.length
       );
+      this.emitSelectedPart();
     }
   }
 };
