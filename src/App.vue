@@ -32,12 +32,12 @@
 
 <script>
 export default {
-  name: "app",
+  name: 'app',
   computed: {
     cart() {
       return this.$store.state.cart;
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

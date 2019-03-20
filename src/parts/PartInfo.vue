@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import getPartsMixin from "./get-parts-mixin";
+import getPartsMixin from './get-parts-mixin';
 
 export default {
-  name: "PartInfo",
+  name: 'PartInfo',
   mixins: [getPartsMixin],
   props: {
     partType: { type: String },
@@ -17,14 +17,14 @@ export default {
       type: [Number, String],
       validator(value) {
         return Number.isInteger(Number(value));
-      }
-    }
+      },
+    },
   },
   computed: {
     part() {
       const { partType, id } = this;
       return this.parts[partType].find(part => part.id === +id);
-    }
-  }
+    },
+  },
 };
 </script>

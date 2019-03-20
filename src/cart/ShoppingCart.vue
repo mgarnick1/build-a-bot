@@ -35,13 +35,13 @@
 
 <script>
 export default {
-  name: "Cart",
+  name: 'Cart',
   computed: {
     cart() {
       return this.$store.state.cart;
     },
     cartSaleItems() {
-        return this.$store.getters.cartSaleItems;
+      return this.$store.getters.cartSaleItems;
     },
   },
 };
