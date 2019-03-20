@@ -72,6 +72,7 @@ export default {
     if (this.addedToCart) {
       next(true);
     } else {
+      /* eslint no-alert: 0 */
       /* eslint-disable-next-line no-restricted-globals */
       const response = confirm(
         'You have not added your robot to your cart, are you sure you want to leave?',
