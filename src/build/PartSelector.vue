@@ -39,17 +39,17 @@ export default {
       type: String,
       required: true,
       validator(value) {
-        return ["left", "right", "center", "bottom", "top"].includes(value);
-      }
-    }
+        return ['left', 'right', 'center', 'bottom', 'top'].includes(value);
+      },
+    },
   },
   data() {
-    return { selectedPartIndex: 0, pinPadding: "10px" };
+    return { selectedPartIndex: 0, pinPadding: '10px' };
   },
   computed: {
     selectedPart() {
       return this.parts[this.selectedPartIndex];
-    }
+    },
   },
   created() {
     this.emitSelectedPart();
@@ -59,21 +59,21 @@ export default {
   },
   methods: {
     emitSelectedPart() {
-      this.$emit("partSelected", this.selectedPart);
+      this.$emit('partSelected', this.selectedPart);
     },
     selectNextPart() {
       this.selectedPartIndex = getNextValidIndex(
         this.selectedPartIndex,
-        this.parts.length
+        this.parts.length,
       );
     },
     selectPreviousPart() {
       this.selectedPartIndex = getPreviousValidIndex(
         this.selectedPartIndex,
-        this.parts.length
+        this.parts.length,
       );
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -35,15 +35,15 @@
 
 <script>
 export default {
-  name: "Cart",
+  name: 'Cart',
   computed: {
     cart() {
       return this.$store.state.robots.cart;
     },
     cartSaleItems() {
-      return this.$store.getters["robots/cartSaleItems"];
-    }
-  }
+      return this.$store.getters['robots/cartSaleItems'];
+    },
+  },
 };
 </script>
 
